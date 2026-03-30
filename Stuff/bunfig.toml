@@ -1,0 +1,3 @@
+[serve.static]
+plugins = ["bun-plugin-tailwind", "bun-plugin-react-compiler"]
+env = "BUN_PUBLIC_*"
