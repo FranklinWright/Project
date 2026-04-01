@@ -1,0 +1,125 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity "**alembic_version**" {
+  + ""version_num"": //character varying(32) [PK]//
+  --
+}
+
+entity "**region_transport_systems**" {
+  + ""region_id"": //integer [PK][FK]//
+  + ""transport_system_id"": //integer [PK][FK]//
+  --
+}
+
+entity "**regions**" {
+  + ""id"": //serial [PK]//
+  --
+  *""name"": //text //
+  *""code"": //text //
+  ""population"": //integer //
+  ""median_household_income"": //integer //
+  ""no_vehicle_available_percent"": //double precision //
+  ""poverty_rate_percent"": //double precision //
+  ""image_url"": //text //
+  ""wikipedia_url"": //text //
+  ""tourism_url"": //text //
+  ""twitter_url"": //text //
+  ""updated_at"": //text //
+  ""railroads_overview"": //text //
+  ""number_of_amtrak_stations"": //integer //
+  ""number_of_amtrak_routes"": //integer //
+}
+
+entity "**route_regions**" {
+  + ""route_id"": //integer [PK][FK]//
+  + ""region_id"": //integer [PK][FK]//
+  --
+}
+
+entity "**route_stations**" {
+  + ""route_id"": //integer [PK][FK]//
+  + ""station_id"": //integer [PK][FK]//
+  --
+  *""is_major"": //boolean //
+  ""sort_order"": //integer //
+}
+
+entity "**routes**" {
+  + ""id"": //serial [PK]//
+  --
+  *""name"": //text //
+  ""description"": //text //
+  ""travel_time_in_hours"": //text //
+  ""image_url"": //text //
+  ""amtrak_url"": //text //
+  ""wikipedia_url"": //text //
+  ""youtube_url"": //text //
+  ""updated_at"": //text //
+  ""menu"": //text[] //
+}
+
+entity "**station_connected_regions**" {
+  + ""station_id"": //integer [PK][FK]//
+  + ""region_id"": //integer [PK][FK]//
+  --
+}
+
+entity "**station_nearby_stations**" {
+  + ""station_id"": //integer [PK][FK]//
+  + ""nearby_station_id"": //integer [PK][FK]//
+  --
+}
+
+entity "**stations**" {
+  + ""id"": //serial [PK]//
+  --
+  *""name"": //text //
+  *""code"": //text //
+  ""address"": //text //
+  ""timezone"": //text //
+  ""description"": //text //
+  ""hours"": //text //
+  ""image_url"": //text //
+  ""region_id"": //integer [FK]//
+  ""routes_served_count"": //integer //
+  ""amtrak_url"": //text //
+  ""wikipedia_url"": //text //
+  ""facebook_url"": //text //
+  ""twitter_url"": //text //
+  ""poi_image_url"": //text //
+  ""poi_image_label"": //text //
+  ""history"": //text //
+  ""updated_at"": //text //
+  ""points_of_interest"": //text[] //
+}
+
+entity "**transport_systems**" {
+  + ""id"": //serial [PK]//
+  --
+  *""name"": //text //
+}
+
+"**region_transport_systems**"   }--  "**regions**"
+
+"**region_transport_systems**"   }--  "**transport_systems**"
+
+"**route_regions**"   }--  "**regions**"
+
+"**route_regions**"   }--  "**routes**"
+
+"**route_stations**"   }--  "**routes**"
+
+"**route_stations**"   }--  "**stations**"
+
+"**station_connected_regions**"   }--  "**regions**"
+
+"**station_connected_regions**"   }--  "**stations**"
+
+"**station_nearby_stations**"   }--  "**stations**"
+
+"**station_nearby_stations**"   }--  "**stations**"
+
+"**stations**"   }--  "**regions**"
+@enduml

@@ -1,0 +1,19 @@
+.git
+.gitignore
+.venv
+node_modules
+__pycache__
+*.pyc
+.env
+.env.*
+*.log
+.vscode
+.idea
+.DS_Store
+# dist is built in the image
+dist
+*.md
+terminals
+.husky
+data
+scripts/scrape
